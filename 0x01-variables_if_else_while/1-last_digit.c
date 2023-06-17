@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-/*
- * main -Entry point
+/**
+ * main - Entry point
  * Description: 'get the last digit of a number'
  * Return: Always 0 (Success)
  */
