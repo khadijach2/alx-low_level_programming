@@ -11,10 +11,13 @@ int main(void)
 
 {
 
-	int i;
+	int i = 0;
 
-	for (i = 0; i < 10; i++)
-			printf("%d", i);
+	while (i <= 9)
+	{
+		printf("%i", i);
+	i++;
+	}
 	printf("\n");
 
 	return (0);
