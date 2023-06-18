@@ -9,29 +9,22 @@
 
 int main(void)
 {
-	int firstDigit = 0, seconDigit;
+	int firstDigit, seconDigit;
 
-	while (firstDigit <= 99)
+	for (firstDigit = 0; firstDigit <= 98; firstDigit++)
 	{
-		seconDigit = firstDigit;
-		while (seconDigit <= 99)
+		for (seconDigit = firstDigit + 1; seconDigit <= 99; seconDigit++)
 		{
-			if (seconDigit != firstDigit)
-			{
-				putchar((firstDigit / 10) + 48);
-				putchar((firstDigit % 10) + 48);
+			putchar((firstDigit / 10) + '0');
+			putchar((firstDigit % 10) + '0');
+			putchar(' ');
+				putchar((seconDigit / 10) + '0');
+				putchar((seconDigit % 10) + '0');
+				if (firstDigit == 98 && seconDigit == 99)
+					continue;
+				putchar(',');
 				putchar(' ');
-				putchar((seconDigit / 10) + 48);
-				putchar((seconDigit % 10) + 48);
-				if (firstDigit != 98 || seconDigit != 99)
-				{
-					putchar(' ');
-					putchar(',');
-				}
-			}
-			seconDigit++;
 		}
-		firstDigit++;
 	}
 	putchar('\n');
 
