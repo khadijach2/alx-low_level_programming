@@ -11,7 +11,7 @@
 
 int main(void)
 {
-	int sm = 0, num;
+	int sum = 0, num;
 
 	while (num < 1024)
 	{
