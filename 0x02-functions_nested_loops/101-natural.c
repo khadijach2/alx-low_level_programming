@@ -1,4 +1,4 @@
-#include "main.h"
+#include "stdio.h"
 
 /**
  * main - Entry point
@@ -11,12 +11,15 @@
 
 int main(void)
 {
-	int sm, num;
+	int sm = 0, num;
 
-	for (num = 0; num < 1024; num++)
+	while (num < 1024)
 	{
 		if ((num % 3 == 0) || (num % 5 == 0))
+		{
 			sum += num;
+	}
+		num++;
 	}
 	printf("%d\n", sum);
 
