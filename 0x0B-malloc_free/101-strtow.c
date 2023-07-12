@@ -1,66 +1,78 @@
 #include "main.h"
+#include <stdlib.h>
 
 /**
- * _isspace - check if a character is whitespace
- * @c: the character to check
+ * cunt_word - counts the number of words in a string
+ * @s: string to count
  *
- * Return: 1 is c is a whitespace character, otherwise 0
+ * Return: int of number of words
  */
-int _isspace(int c)
+int count_word(char *s)
 {
-	if (c == 0x20 || (c >= 0x09 && c <= 0x0d))
-		return (1);
-	return (0);
+	int flag, c, w;
+
+	flag = 0;
+	w = 0;
+
+	for (c = 0; s[c] != '\0'; c++)
+	{
+		if (s[c] == ' ')
+			flag = 0;
+		else if (flag == 0)
+		{
+			flag = 1;
+			w++;
+		}
+	}
+
+	return (w);
 }
 
-
 /**
- * strtow - split a string into words
- * @str: a pointer to the string to split
+ * **strtow - splits a string into words
+ * @str: string to split
  *
- * Return: NULL if memory allocation fails or if str is NULL or empty (""),
- * otherwise return a pointer to the array of words terminated by a NULL
+ * Return: pointer to an array of strings
  */
 char **strtow(char *str)
 {
-	char **words, *pos = str;
-	int w = 0, c;
+	int i, k = 0, len = 0, c = 0, words, start, end;
+	char **matrix, *tmp;
 
-	if (!(str && *str))
+	while (*(str + len))
+		len++;
+
+	words = count_word(str);
+	if (words ==  0)
 		return (NULL);
-	do {
-		while (_isspace(*pos))
-			++pos;
-		if (!*pos)
-			break;
-		while (*(++pos) && !_isspace(*pos))
-			;
-	} while (++w, *pos);
-	if (!w)
+
+	matrix = (char **) malloc(sizeof(char *) * (words +1));
+	if (matrix == NULL)
 		return (NULL);
-	words = (char **) malloc(sizeof(char *) * (w + 1));
-	if (!words)
-		return (NULL);
-	w = 0, pos = str;
-	do {
-		while (_isspace(*pos))
-			++pos;
-		if (!*pos)
-			break;
-		for (str = pos++; *pos && !_isspace(*pos); ++pos)
-			;
-		words[w] = (char *) malloc(sizeof(char) * (pos - str + 1));
-		if (!words[w])
+
+	for (i = 0; i <= len; i++)
+	{
+		if (str[i] == ' ' || str[i] == '\0')
 		{
-			while (w >  0)
-				free(words[--w]);
-			free(words);
-			return (NULL);
+			if (c)
+			{
+				end = i;
+				tmp = (char *) malloc(sizeof(char) * (c + 1));
+				if (tmp == NULL)
+					return (NULL);
+				while (start < end)
+					*tmp++ = str[start++];
+				*tmp = '\0';
+				matrix[k] = tmp - c;
+				k++;
+				c = 0;
+			}
 		}
-		for (c = 0; str < pos; ++c, ++str)
-			words[w][c] = *str;
-		words[w][c] = '\0';
-	} while (++w, *pos);
-	words[w] = NULL;
-	return (words);
+		else if (c++ == 0)
+			start = i;
+	}
+
+	matrix[k] = NULL;
+
+	return (matrix);
 }
